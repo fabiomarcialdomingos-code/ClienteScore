@@ -1,0 +1,70 @@
+.root{ --bg:#0B1120; --surface:#131C31; --surface2:#1B2742; --line:rgba(255,255,255,.08);
+  --text:#EDE9DD; --soft:#D8D3C4; --muted:#9AA3B5; --amber:#F5B841; --amber2:#FFCE63;
+  --green:#3ECF8E; --coral:#FF8A7A; color:var(--text); min-height:100vh; position:relative; overflow:hidden; }
+.root *{ box-sizing:border-box; }
+
+/* estrelas vivas no fundo */
+.stars{ position:fixed; inset:0; z-index:0; pointer-events:none; }
+.stars i{ position:absolute; border-radius:50%; background:#F5E9C8; opacity:.2; animation:tw ease-in-out infinite; }
+.stars i.c{ background:none; color:var(--amber); line-height:1; filter:drop-shadow(0 0 6px rgba(245,184,65,.6)); }
+@keyframes tw{ 0%,100%{opacity:.12;transform:scale(.7)} 50%{opacity:var(--o,.9);transform:scale(1.2)} }
+.glow{ position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(45% 35% at 85% -5%,rgba(245,184,65,.13),transparent 70%),
+             radial-gradient(40% 35% at -5% 85%,rgba(80,140,255,.08),transparent 70%); }
+
+.shell{ position:relative; z-index:1; min-height:100vh; display:grid; grid-template-columns:1.05fr .95fr; }
+
+/* lado da marca */
+.brand{ padding:48px 56px; display:flex; flex-direction:column; justify-content:center; border-right:1px solid var(--line); position:relative; overflow:hidden; }
+.logo{ display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-size:19px; color:var(--text); text-decoration:none; position:absolute; top:34px; left:56px; letter-spacing:.3px; }
+.logoMark{ width:32px; height:32px; border-radius:9px; background:linear-gradient(135deg,var(--amber2),var(--amber)); color:#14203A; display:flex; align-items:center; justify-content:center; font-size:17px; box-shadow:0 4px 16px rgba(245,184,65,.4); }
+.amber{ color:var(--amber); }
+.brand h1{ font-family:var(--font-display); font-weight:400; font-size:clamp(34px,4.2vw,52px); line-height:1.12; letter-spacing:.3px; margin-bottom:18px; }
+.brand h1 em{ font-style:normal; color:var(--amber); background:linear-gradient(transparent 72%,rgba(245,184,65,.28) 0); padding:0 4px; }
+.brand .sub{ color:var(--muted); font-size:16.5px; max-width:440px; margin-bottom:36px; }
+.proof{ background:var(--surface); border:1px solid rgba(245,184,65,.3); border-left:4px solid var(--amber); border-radius:16px; padding:26px 28px; max-width:460px; box-shadow:0 20px 50px rgba(0,0,0,.4); transition:opacity .4s,transform .4s; }
+.proof.swap{ opacity:0; transform:translateY(12px); }
+.proof .pstars{ color:var(--amber); letter-spacing:4px; font-size:18px; text-shadow:0 0 14px rgba(245,184,65,.5); margin-bottom:12px; }
+.proof .quote{ color:var(--soft); font-size:17px; line-height:1.55; font-weight:500; }
+.proof .who{ color:var(--muted); font-size:13px; font-weight:600; margin-top:14px; }
+.markers{ margin-top:34px; color:var(--muted); font-size:13px; font-weight:600; letter-spacing:.4px; display:flex; gap:10px; flex-wrap:wrap; }
+.markers span{ display:inline-flex; align-items:center; gap:6px; }
+.markers b{ color:var(--green); }
+
+/* lado do formulário */
+.formSide{ display:flex; align-items:center; justify-content:center; padding:48px 32px; }
+.card{ width:100%; max-width:420px; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:36px 34px; box-shadow:0 30px 70px rgba(0,0,0,.5); animation:cardIn .6s cubic-bezier(.2,.9,.3,1.05); }
+@keyframes cardIn{ from{opacity:0;transform:translateY(26px) scale(.97)} to{opacity:1;transform:none} }
+.card h2{ font-family:var(--font-display); font-weight:400; font-size:24px; margin-bottom:6px; }
+.card .hint{ color:var(--muted); font-size:13.5px; margin-bottom:24px; }
+.tabs{ display:flex; background:var(--surface2); border-radius:11px; padding:4px; margin-bottom:26px; position:relative; }
+.tabs button{ flex:1; background:none; border:0; color:var(--muted); font:600 14px var(--font-body); padding:10px; border-radius:8px; cursor:pointer; transition:color .2s; position:relative; z-index:1; }
+.tabs button.on{ color:#14203A; }
+.tabGlide{ position:absolute; top:4px; bottom:4px; width:calc(50% - 4px); border-radius:8px; background:var(--amber); box-shadow:0 4px 14px rgba(245,184,65,.3); transition:transform .28s cubic-bezier(.2,.9,.3,1); }
+.tabGlide.right{ transform:translateX(100%); }
+.field{ margin-bottom:18px; }
+.label{ display:block; font-weight:700; font-size:13px; margin-bottom:7px; color:var(--soft); }
+.in{ width:100%; background:var(--surface2); border:1.5px solid var(--line); border-radius:11px; color:var(--text); padding:13px 15px; font:500 15px var(--font-body); transition:border .2s,box-shadow .2s; }
+.in:focus{ outline:none; border-color:var(--amber); box-shadow:0 0 0 3px rgba(245,184,65,.16); }
+.in.shake{ animation:shake .45s; }
+@keyframes shake{ 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-7px)} 40%,80%{transform:translateX(7px)} }
+.btn{ width:100%; background:var(--amber); color:#14203A; font:700 15.5px var(--font-body); padding:15px; border-radius:12px; border:0; cursor:pointer; box-shadow:0 8px 24px rgba(245,184,65,.3); transition:transform .2s,filter .2s; }
+.btn:hover{ transform:translateY(-2px); filter:brightness(1.06); }
+.btn:disabled{ opacity:.6; cursor:wait; transform:none; }
+.linkish{ background:none; border:0; color:var(--muted); font:600 12.5px var(--font-body); cursor:pointer; text-decoration:underline; text-underline-offset:3px; padding:0; transition:color .2s; }
+.linkish:hover{ color:var(--amber); }
+.rowBetween{ display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+.fine{ color:var(--muted); font-size:12px; text-align:center; margin-top:16px; }
+.fine b{ color:var(--green); }
+.alert{ border-radius:10px; padding:11px 14px; font-size:13px; margin-bottom:16px; line-height:1.45; }
+.alert.err{ background:rgba(255,138,122,.1); border:1px solid rgba(255,138,122,.4); color:#FFB4AA; }
+.alert.ok{ background:rgba(62,207,142,.1); border:1px solid rgba(62,207,142,.4); color:#9be8c4; }
+
+@media (max-width:920px){
+  .shell{ grid-template-columns:1fr; }
+  .brand{ border-right:0; border-bottom:1px solid var(--line); padding:90px 28px 44px; }
+  .logo{ left:28px; top:26px; }
+  .proof,.brand .sub{ max-width:100%; }
+  .formSide{ padding:40px 22px 60px; }
+}
+@media (prefers-reduced-motion:reduce){ .root *,.root *::before,.root *::after{ animation:none !important; transition:none !important; } }
