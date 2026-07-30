@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+import { get_branding } from '@/lib/branding'
 import ReviewClient from './ReviewClient'
 
-// busca o negócio em tempo real (não cachear no build) — ajustamos cache fino no deploy
+// busca o negócio em tempo real (não cachear no build) — cache fino ajusta no deploy
 export const dynamic = 'force-dynamic'
 
 function shade(hex, p) {
@@ -18,24 +18,24 @@ const SEGTAG = {
   servicos: 'Serviços locais', academia: 'Academia', outro: 'Negócio local',
 }
 
+// metadata também lê pelo ÚNICO ponto (get_branding) — sem consulta duplicada
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  const { data } = await supabase.from('tenant_branding').select('name').eq('slug', slug).maybeSingle()
+  const data = await get_branding(slug)
   return {
     title: data ? `Avalie ${data.name} · ClienteScore` : 'Avalie · ClienteScore',
-    description: data ? `Deixe sua avaliação da ${data.name} em segundos. Sua opinião vira o melhor marketing dela.` : 'Deixe sua avaliação em segundos.',
+    description: data
+      ? `Deixe sua avaliação da ${data.name} em segundos. Sua opinião vira o melhor marketing dela.`
+      : 'Deixe sua avaliação em segundos.',
   }
 }
 
 export default async function ReviewPage({ params, searchParams }) {
   const { slug } = await params
   const sp = await searchParams
-  const { data: tenant } = await supabase
-    .from('tenant_branding')
-    .select('*')
-    .eq('slug', slug)
-    .maybeSingle()
 
+  // leitura pública da marca — allowlist de colunas, filtrado por slug (sem vazamento cruzado)
+  const tenant = await get_branding(slug)
   if (!tenant) notFound()
 
   // a cor da marca vira variável CSS — o mesmo CSS serve qualquer negócio
@@ -51,8 +51,12 @@ export default async function ReviewPage({ params, searchParams }) {
       <div className="df-glow" />
       <ReviewClient
         tenant={{
-          id: tenant.id, slug: tenant.slug, name: tenant.name,
-          segment: tenant.segment, logo_url: tenant.logo_url, gmb_link: tenant.gmb_link,
+          id: tenant.id,
+          slug: tenant.slug,
+          name: tenant.name,
+          segment: tenant.segment,
+          logo_url: tenant.logo_url,
+          gmb_link: tenant.gmb_link,
         }}
         tag={SEGTAG[tenant.segment] || 'Negócio local'}
         invitationToken={sp.i || null}
