@@ -1,5 +1,4 @@
 'use client'
-
 import { useState, useTransition } from 'react'
 import { saveReview, saveFeedback } from './actions'
 
@@ -117,7 +116,7 @@ export default function ReviewClient({ tenant, tag, invitationToken }) {
                 <div className="df-field"><input className="df-in" type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Seu nome (opcional)" /></div>
                 <div className="df-field"><input className="df-in" type="tel" value={phone} onChange={(e) => setPhone(maskPhone(e.target.value))} placeholder="Seu WhatsApp (opcional) 📲" inputMode="numeric" /></div>
                 <label className="df-consent"><input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} /><span className="box" /><span>Autorizo o uso do meu depoimento e do meu nome nas redes sociais de {tenant.name}.<em>🔒 Seus dados estão protegidos · LGPD</em></span></label>
-                <label className="df-consent"><input type="checkbox" checked={optin} onChange={(e) => setOptin(e.target.checked)} /><span className="box" /><span>Quero receber novidades e promoções de {tenant.name} 📲<em>📣 Opt-in de marketing · pode cancelar quando quiser</em></span></label>
+                <label className="df-consent"><input type="checkbox" checked={optin} onChange={(e) => setOptin(e.target.checked)} /><span className="box" /><span>Quero receber atualizações e confirmações da {tenant.name} no WhatsApp 📲<em>🔔 Canal de atendimento · pode cancelar quando quiser</em></span></label>
                 {err ? <p className="df-privacy" style={{ color: '#B02A37' }}>⚠️ {err}</p> : null}
                 <button type="submit" className="df-btn" disabled={pending}>{pending ? 'Enviando…' : 'Enviar depoimento ✨'}</button>
               </form>
@@ -171,15 +170,16 @@ export default function ReviewClient({ tenant, tag, invitationToken }) {
         <section className={'df-screen' + (screen === 'thanks-negative' ? ' is-active' : '')}>
           <h2 className="df-thanks-head">Obrigado por nos ajudar a melhorar 🙏</h2>
           <p className="df-thanks-sub">Seu feedback foi enviado em privado ao gerente.</p>
-          <a className="df-wa" href={waHref} target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12.1 21.8h-.01a9.9 9.9 0 01-5.04-1.38l-.36-.21-3.75.98 1-3.65-.24-.37a9.86 9.86 0 01-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 019.89 9.89c0 5.45-4.44 9.88-9.88 9.88m8.4-18.3A11.8 11.8 0 0012.1 0C5.5 0 .1 5.4.1 12c0 2.1.55 4.16 1.6 5.97L0 24l6.2-1.62a11.9 11.9 0 005.9 1.5h.01c6.6 0 12-5.4 12-12 0-3.2-1.25-6.2-3.5-8.4z" /></svg>
-            Chamar o gerente no WhatsApp
-          </a>
+          {tenant.whatsapp ? (
+            <a className="df-wa" href={waHref} target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12.1 21.8h-.01a9.9 9.9 0 01-5.04-1.38l-.36-.21-3.75.98 1-3.65-.24-.37a9.86 9.86 0 01-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 019.89 9.89c0 5.45-4.44 9.88-9.88 9.88m8.4-18.3A11.8 11.8 0 0012.1 0C5.5 0 .1 5.4.1 12c0 2.1.55 4.16 1.6 5.97L0 24l6.2-1.62a11.9 11.9 0 005.9 1.5h.01c6.6 0 12-5.4 12-12 0-3.2-1.25-6.2-3.5-8.4z" /></svg>
+              Chamar o gerente no WhatsApp
+            </a>
+          ) : null}
           <p className="df-micro">Nada será publicado. Sua opinião fica só entre a gente.</p>
           <button className="df-restart" onClick={reset}>↺ Fazer outra avaliação</button>
         </section>
       </main>
-
       <a className="df-powered" href="/">⚡ por <b>ClienteScore</b></a>
       <div className="df-confetti" id="df-confetti" />
     </>
