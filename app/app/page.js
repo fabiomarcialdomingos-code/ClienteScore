@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import Link from 'next/link' // P0-UX: links internos mesma-aba como <Link> = sem reload branco (mata a "câmera-lenta" do logo)
 import ArtEngineClient from './ArtEngineClient'
 import { createClient } from '@/lib/supabase/server'
 import { logout } from '@/lib/auth-actions'
@@ -7,8 +8,10 @@ import PostsQueue from './PostsQueue'
 import BeltSection from './BeltSection'
 import ComunicadosSection from './ComunicadosSection'
 import styles from './app.module.css'
+
 export const metadata = { title: 'Meu painel · ClienteScore' }
-export const dynamic_route = 'force-dynamic'
+// nome CORRETO da diretiva (era "dynamic_route", que o Next ignora → risco de cachear o placar entre donos)
+export const dynamic = 'force-dynamic'
 
 export default async function AppPage() {
   const supabase = await createClient()
@@ -48,9 +51,8 @@ export default async function AppPage() {
     <div className={styles.root}>
       <div className={styles.dots} />
       <div className={styles.glow} />
-
       <header className={styles.topbar}>
-        <a className={styles.logo} href="/app"><span className={styles.logoMark}>★</span><span>Cliente<span className={styles.amber}>Score</span></span></a>
+        <Link className={styles.logo} href="/app"><span className={styles.logoMark}>★</span><span>Cliente<span className={styles.amber}>Score</span></span></Link>
         <div className={styles.spacer} />
         {tenant ? <span className={styles.pill}>💈 {tenant.name}</span> : null}
         <form action={logout}>
@@ -58,19 +60,17 @@ export default async function AppPage() {
         </form>
         <div className={styles.avatar}>{initial}</div>
       </header>
-
       <main className={styles.shell}>
         <div className={styles.greet}>
           <h1>{first ? `Fala, ${first}! ` : 'Olá! '}<span className={styles.wave}>👋</span><span className={styles.liveTag}><span className={styles.ld} />ao vivo</span></h1>
           <p>{tenant ? <>Este é o seu placar real, puxado do banco com a sua sessão. Cada elogio que entra <b>soma aqui</b>.</> : 'Você ainda não tem uma página. Crie a primeira em 1 minuto — o espelho te mostra como ela fica antes mesmo de existir.'}</p>
         </div>
-
         {!tenant ? (
           <div className={styles.empty}>
             <span className={styles.e}>🏪</span>
             <h4>Nenhuma página criada ainda</h4>
             <p>Quando você criar sua página, ela aparece aqui com o QR Code e o placar ao vivo.</p>
-            <a className={styles.btnA} href="/onboarding" style={{ marginTop: 18, display: 'inline-block' }}>Criar minha página →</a>
+            <Link className={styles.btnA} href="/onboarding" style={{ marginTop: 18, display: 'inline-block' }}>Criar minha página →</Link>
           </div>
         ) : (
           <>
@@ -79,7 +79,6 @@ export default async function AppPage() {
               <div className={styles.m}><span className={styles.n}><CountUp value={counts.posts} /></span><span className={styles.l}>posts gerados</span></div>
               <div className={styles.m}><span className={styles.n}><CountUp value={counts.feedbacks} /></span><span className={styles.l}>feedbacks privados</span></div>
             </section>
-
             <div className={styles.cols}>
               <section className={styles.card} aria-label="Sua página pública">
                 <h3>🔗 Sua página de avaliação</h3>
@@ -95,7 +94,6 @@ export default async function AppPage() {
                   </div>
                 </div>
               </section>
-
               <section className={styles.card} aria-label="Sua central">
                 <h3>🧩 Sua central <small>— atalhos</small></h3>
                 <div className={styles.soon}>
@@ -107,7 +105,6 @@ export default async function AppPage() {
                 </div>
               </section>
             </div>
-
             <section id="fila" className={styles.queue} aria-label="Fila de posts">
               <div className={styles.queueHead}>
                 <h2 className={styles.queueTitle}>Fila de Posts</h2>
@@ -115,7 +112,6 @@ export default async function AppPage() {
               </div>
               <PostsQueue posts={queue} tenant={{ slug: tenant.slug, name: tenant.name, brand_color: tenant.brand_color }} />
             </section>
-
             <BeltSection tenant={tenant} />
             <ComunicadosSection tenant={tenant} />
             <ArtEngineClient tenantId={tenant.id} tenant={{ slug: tenant.slug, name: tenant.name, brand_color: tenant.brand_color }} />
