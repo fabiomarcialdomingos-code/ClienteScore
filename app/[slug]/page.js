@@ -13,9 +13,15 @@ function shade(hex, p) {
 }
 
 const SEGTAG = {
-  barbearia: 'Barbearia clássica', estetica: 'Clínica de estética', petshop: 'O favorito do seu pet',
-  consultorio: 'Consultório odontológico', restaurante: 'Restaurante de bairro', salao: 'Salão de beleza',
-  servicos: 'Serviços locais', academia: 'Academia', outro: 'Negócio local',
+  barbearia: 'Barbearia clássica',
+  estetica: 'Clínica de estética',
+  petshop: 'O favorito do seu pet',
+  consultorio: 'Consultório odontológico',
+  restaurante: 'Restaurante de bairro',
+  salao: 'Salão de beleza',
+  servicos: 'Serviços locais',
+  academia: 'Academia',
+  outro: 'Negócio local',
 }
 
 // metadata também lê pelo ÚNICO ponto (get_branding) — sem consulta duplicada
@@ -57,6 +63,7 @@ export default async function ReviewPage({ params, searchParams }) {
           segment: tenant.segment,
           logo_url: tenant.logo_url,
           gmb_link: tenant.gmb_link,
+          whatsapp: tenant.whatsapp,
         }}
         tag={SEGTAG[tenant.segment] || 'Negócio local'}
         invitationToken={sp.i || null}
