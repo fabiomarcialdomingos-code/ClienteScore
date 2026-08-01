@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
-import Link from 'next/link' // P0-UX: links internos mesma-aba como <Link> = sem reload branco (mata a "câmera-lenta" do logo)
+import Link from 'next/link' // P0-UX: links internos de rota DIFERENTE como <Link> = sem reload branco (ex.: "Criar minha página" → /onboarding)
+import LogoLink from './LogoLink' // P0-UX: o logo é "recarregar painel" (refresh+topo), não navegação — ver LogoLink.js
 import ArtEngineClient from './ArtEngineClient'
 import { createClient } from '@/lib/supabase/server'
 import { logout } from '@/lib/auth-actions'
@@ -52,7 +53,7 @@ export default async function AppPage() {
       <div className={styles.dots} />
       <div className={styles.glow} />
       <header className={styles.topbar}>
-        <Link className={styles.logo} href="/app"><span className={styles.logoMark}>★</span><span>Cliente<span className={styles.amber}>Score</span></span></Link>
+        <LogoLink />
         <div className={styles.spacer} />
         {tenant ? <span className={styles.pill}>💈 {tenant.name}</span> : null}
         <form action={logout}>
