@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createBrowserClient } from '@supabase/ssr'
-import styles from './app.module.css'
+import styles from '../../styles/dashboard.module.css'
 
 const TPL = {
   promo:     { emoji: '🔥', label: 'PROMOÇÃO',       bg: '#F5B841',            fg: '#14203A', txt: true,  date: true },

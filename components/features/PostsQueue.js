@@ -2,7 +2,7 @@
 
 import { useState, useTransition, useRef } from 'react'
 import { markPublished, markScheduled } from './post-actions'
-import styles from './app.module.css'
+import styles from '../../styles/dashboard.module.css'
 
 function timeAgo(iso) {
   const d = new Date(iso), now = new Date(), s = Math.floor((now - d) / 1000)

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useTransition } from 'react'
 import { addAppointment, serveTick, sendInvite } from './belt-actions'
-import styles from './app.module.css'
+import styles from '../../styles/dashboard.module.css'
 
 function maskPhone(v) {
   v = String(v || '').replace(/\D/g, '').slice(0, 11)

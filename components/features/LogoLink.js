@@ -22,7 +22,7 @@
 //   achando que é "mais correto" — pra mesma rota o Link é mudo. O refresh é
 //   a ação certa. Se um dia o logo tiver que ir pra OUTRA rota, aí sim use Link.
 import { useRouter } from 'next/navigation'
-import styles from './app.module.css'
+import styles from '../../styles/dashboard.module.css'
 
 export default function LogoLink() {
   const router = useRouter()

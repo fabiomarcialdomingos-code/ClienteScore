@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import ComunicadosComposer from './ComunicadosComposer'
-import styles from './app.module.css'
+import styles from '../../styles/dashboard.module.css'
 
 export const dynamic = 'force-dynamic'
 

@@ -1,6 +1,6 @@
 'use client'
 import { useState, useTransition } from 'react'
-import { saveReview, saveFeedback } from './actions'
+import { saveReview, saveFeedback } from '../../app/[slug]/actions'
 
 const LABELS = ['Péssimo 😞', 'Ruim 😕', 'Ok 😐', 'Muito bom 😊', 'Excelente 🤩']
 const STAR = 'M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'

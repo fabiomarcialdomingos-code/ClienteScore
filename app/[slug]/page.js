@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { get_branding } from '@/lib/branding'
-import ReviewClient from './ReviewClient'
+import ReviewClient from '../../components/features/ReviewClient'
 
 // busca o negócio em tempo real (não cachear no build) — cache fino ajusta no deploy
 export const dynamic = 'force-dynamic'
