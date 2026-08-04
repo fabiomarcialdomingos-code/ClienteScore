@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
-import OnboardingForm from './OnboardingForm'
-import styles from './onboarding.module.css'
+import OnboardingForm from '../../components/features/OnboardingForm'
+import styles from '../../styles/onboarding.module.css'
 
 export const metadata = { title: 'Criar minha página · ClienteScore' }
 export const dynamic = 'force-dynamic'

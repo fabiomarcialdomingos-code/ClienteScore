@@ -22,7 +22,7 @@
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { setDelay as setDelayAction, togglePause as togglePauseAction } from './belt-actions'
-import styles from './app.module.css'
+import styles from '../../styles/dashboard.module.css'
 
 const DELAYS = [15, 30, 60, 120]
 

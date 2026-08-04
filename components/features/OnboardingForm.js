@@ -1,7 +1,7 @@
 'use client'
 import { useActionState, useState } from 'react'
 import { createTenant } from '@/lib/tenant-actions'
-import styles from './onboarding.module.css'
+import styles from '../../styles/onboarding.module.css'
 
 const COLORS = [
   ['Verde Fígaro', '#0E3B2E'], ['Vinho', '#5A1320'], ['Azul Noite', '#14304A'], ['Roxo', '#2A1A40'],

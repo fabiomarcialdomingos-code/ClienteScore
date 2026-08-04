@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import ServiceBelt from './ServiceBelt'
 import BeltControls from './BeltControls'
-import styles from './app.module.css'
+import styles from '../../styles/dashboard.module.css'
 
 export const dynamic = 'force-dynamic'
 

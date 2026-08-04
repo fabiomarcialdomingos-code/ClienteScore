@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import styles from './legal.module.css'
+import styles from '../../styles/legal.module.css'
 
 export default function LegalReader() {
   const barRef = useRef(null)

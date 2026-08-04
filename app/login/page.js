@@ -1,5 +1,5 @@
-import AuthForm from './AuthForm'
-import styles from './auth.module.css'
+import AuthForm from '../../components/features/AuthForm'
+import styles from '../../styles/auth.module.css'
 
 export const metadata = { title: 'Entrar · ClienteScore' }
 

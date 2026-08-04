@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import styles from './legal.module.css'
+import styles from '../../styles/legal.module.css'
 
 const KEY = 'cs-cookie-consent' // 'all' | 'essential'
 

@@ -1,5 +1,5 @@
-import styles from './landing.module.css'
-import LandingDemo from './LandingDemo'
+import styles from '../styles/landing.module.css'
+import LandingDemo from '../components/features/LandingDemo'
 
 export const metadata = {
   title: 'ClienteScore — cada elogio vira pontuação (e cliente)',

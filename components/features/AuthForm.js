@@ -1,8 +1,8 @@
 'use client'
 
 import { useActionState, useEffect, useRef, useState } from 'react'
-import { login, signup } from '@/lib/auth-actions'
-import styles from './auth.module.css'
+import { login, signup } from '../../app/login/auth-actions'
+import styles from '../../styles/auth.module.css'
 
 const PROOF = [
   { q: '"Eu não postava nunca. Agora meu Instagram vive de elogios reais dos meus clientes."', w: '— João · Barbearia Fígaro' },

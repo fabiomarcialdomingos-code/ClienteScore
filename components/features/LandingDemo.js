@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { Caveat } from 'next/font/google'
-import styles from './landing.module.css'
+import styles from '../../styles/landing.module.css'
 
 const handwriting = Caveat({ weight: '600', subsets: ['latin'] })
 
